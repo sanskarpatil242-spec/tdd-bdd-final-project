@@ -1,0 +1,273 @@
+﻿======================================================================
+PRODUCT SERVICE UNIT TESTS & COVERAGE (PYTEST)
+======================================================================
+============================= test session starts =============================
+platform win32 -- Python 3.13.7, pytest-9.2.0, pluggy-1.7.0 -- C:\Users\sansk\.gemini\antigravity\scratch\tdd-bdd-final-project\venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\sansk\.gemini\antigravity\scratch\tdd-bdd-final-project
+plugins: Faker-40.44.0, cov-7.1.0
+collecting ... collected 27 items
+
+tests/test_cli_commands.py::TestFlaskCLI::test_db_create PASSED          [  3%]
+tests/test_models.py::TestProductModel::test_add_a_product PASSED        [  7%]
+tests/test_models.py::TestProductModel::test_create_a_product PASSED     [ 11%]
+tests/test_models.py::TestProductModel::test_delete_a_product PASSED     [ 14%]
+tests/test_models.py::TestProductModel::test_find_by_availability PASSED [ 18%]
+tests/test_models.py::TestProductModel::test_find_by_category PASSED     [ 22%]
+tests/test_models.py::TestProductModel::test_find_by_name PASSED         [ 25%]
+tests/test_models.py::TestProductModel::test_find_by_price PASSED        [ 29%]
+tests/test_models.py::TestProductModel::test_list_all_products PASSED    [ 33%]
+tests/test_models.py::TestProductModel::test_read_a_product PASSED       [ 37%]
+tests/test_models.py::TestProductModel::test_update_a_product PASSED     [ 40%]
+tests/test_models.py::TestProductModel::test_update_empty_id PASSED      [ 44%]
+tests/test_routes.py::TestProductRoutes::test_create_product PASSED      [ 48%]
+tests/test_routes.py::TestProductRoutes::test_create_product_no_content_type PASSED [ 51%]
+tests/test_routes.py::TestProductRoutes::test_create_product_with_no_name PASSED [ 55%]
+tests/test_routes.py::TestProductRoutes::test_create_product_wrong_content_type PASSED [ 59%]
+tests/test_routes.py::TestProductRoutes::test_delete_product PASSED      [ 62%]
+tests/test_routes.py::TestProductRoutes::test_get_product PASSED         [ 66%]
+tests/test_routes.py::TestProductRoutes::test_get_product_list PASSED    [ 70%]
+tests/test_routes.py::TestProductRoutes::test_get_product_not_found PASSED [ 74%]
+tests/test_routes.py::TestProductRoutes::test_health PASSED              [ 77%]
+tests/test_routes.py::TestProductRoutes::test_index PASSED               [ 81%]
+tests/test_routes.py::TestProductRoutes::test_query_by_availability PASSED [ 85%]
+tests/test_routes.py::TestProductRoutes::test_query_by_category PASSED   [ 88%]
+tests/test_routes.py::TestProductRoutes::test_query_by_name PASSED       [ 92%]
+tests/test_routes.py::TestProductRoutes::test_update_product PASSED      [ 96%]
+tests/test_routes.py::TestProductRoutes::test_update_product_not_found PASSED [100%]
+
+============================== warnings summary ===============================
+tests/test_models.py::TestProductModel::test_read_a_product
+tests/test_routes.py::TestProductRoutes::test_create_product
+tests/test_routes.py::TestProductRoutes::test_delete_product
+tests/test_routes.py::TestProductRoutes::test_delete_product
+tests/test_routes.py::TestProductRoutes::test_get_product
+tests/test_routes.py::TestProductRoutes::test_get_product_not_found
+tests/test_routes.py::TestProductRoutes::test_update_product
+tests/test_routes.py::TestProductRoutes::test_update_product_not_found
+  C:\Users\sansk\.gemini\antigravity\scratch\tdd-bdd-final-project\service\models.py:190: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+    return cls.query.get(product_id)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=============================== tests coverage ================================
+_______________ coverage: platform win32, python 3.13.7-final-0 _______________
+
+Name                               Stmts   Miss  Cover   Missing
+----------------------------------------------------------------
+service\__init__.py                   18      3    83%   53-56
+service\common\__init__.py             2      0   100%
+service\common\cli_commands.py         7      0   100%
+service\common\error_handlers.py      32      6    81%   59-61, 89-91
+service\common\log_handlers.py        11      1    91%   36
+service\common\status.py              63      0   100%
+service\config.py                      7      0   100%
+service\models.py                     91      5    95%   139, 145, 148-149, 220
+service\routes.py                     82      0   100%
+----------------------------------------------------------------
+TOTAL                                313     15    95%
+======================= 27 passed, 8 warnings in 2.83s ========================
+
+======================================================================
+PRODUCT SERVICE BDD FEATURE TESTS (BEHAVE)
+======================================================================
+USING RUNNER: behave.runner:Runner
+Feature: The product store service back-end # features/products.feature:1
+  As a Product Store Owner
+  I need a RESTful catalog service
+  So that I can keep track of all my products
+  Feature: The product store service back-end  # features/products.feature:1
+
+  Scenario: The server is running                                   # features/products.feature:14
+    Given the following products                                    # features/steps/load_steps.py:33
+      | name    | description     | price  | available | category   |
+      | Hat     | A red fedora    | 59.95  | True      | CLOTHS     |
+      | Shoes   | Blue shoes      | 120.50 | False     | CLOTHS     |
+      | Big Mac | 1/4 lb burger   | 5.99   | True      | FOOD       |
+      | Sheets  | Full bed sheets | 87.00  | True      | HOUSEWARES |
+    When I visit the "Home Page"                                    # features/steps/web_steps.py:36
+    Then I should see "Product Catalog Administration" in the title # features/steps/web_steps.py:43
+    And I should not see "404 Not Found"                            # features/steps/web_steps.py:48
+
+  Scenario: Create a Product                                  # features/products.feature:19
+    Given the following products                              # features/steps/load_steps.py:33
+      | name    | description     | price  | available | category   |
+      | Hat     | A red fedora    | 59.95  | True      | CLOTHS     |
+      | Shoes   | Blue shoes      | 120.50 | False     | CLOTHS     |
+      | Big Mac | 1/4 lb burger   | 5.99   | True      | FOOD       |
+      | Sheets  | Full bed sheets | 87.00  | True      | HOUSEWARES |
+    When I visit the "Home Page"                              # features/steps/web_steps.py:36
+    And I set the "Name" to "Hammer"                          # features/steps/web_steps.py:53
+    And I set the "Description" to "Claw hammer"              # features/steps/web_steps.py:53
+    And I select "True" in the "Available" dropdown           # features/steps/web_steps.py:60
+    And I select "Tools" in the "Category" dropdown           # features/steps/web_steps.py:60
+    And I set the "Price" to "34.95"                          # features/steps/web_steps.py:53
+    And I press the "Create" button                           # features/steps/web_steps.py:107
+    Then I should see the message "Success"                   # features/steps/web_steps.py:139
+    When I copy the "Id" field                                # features/steps/web_steps.py:81
+.\venv\Scripts\behave.exe : LOG_INFO:root: Clipboard contains: 5
+At line:25 char:18
++     $behaveOut = .\venv\Scripts\behave.exe 2>&1 | Out-String
++                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (LOG_INFO:root: Clipboard contains: 5:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+    And I press the "Clear" button                            # features/steps/web_steps.py:107
+    Then the "Id" field should be empty                       # features/steps/web_steps.py:72
+    And the "Name" field should be empty                      # features/steps/web_steps.py:72
+    And the "Description" field should be empty               # features/steps/web_steps.py:72
+    When I paste the "Id" field                               # features/steps/web_steps.py:90
+    And I press the "Retrieve" button                         # features/steps/web_steps.py:107
+    Then I should see the message "Success"                   # features/steps/web_steps.py:139
+    And I should see "Hammer" in the "Name" field             # features/steps/web_steps.py:119
+    And I should see "Claw hammer" in the "Description" field # features/steps/web_steps.py:119
+    And I should see "True" in the "Available" dropdown       # features/steps/web_steps.py:66
+    And I should see "Tools" in the "Category" dropdown       # features/steps/web_steps.py:66
+    And I should see "34.95" in the "Price" field             # features/steps/web_steps.py:119
+
+  Scenario: Read a Product                                     # features/products.feature:42
+    Given the following products                               # features/steps/load_steps.py:33
+      | name    | description     | price  | available | category   |
+      | Hat     | A red fedora    | 59.95  | True      | CLOTHS     |
+      | Shoes   | Blue shoes      | 120.50 | False     | CLOTHS     |
+      | Big Mac | 1/4 lb burger   | 5.99   | True      | FOOD       |
+      | Sheets  | Full bed sheets | 87.00  | True      | HOUSEWARES |
+    When I visit the "Home Page"                               # features/steps/web_steps.py:36
+    And I set the "Name" to "Hat"                              # features/steps/web_steps.py:53
+    And I press the "Search" button                            # features/steps/web_steps.py:107
+    Then I should see the message "Success"                    # features/steps/web_steps.py:139
+    And I should see "Hat" in the "Name" field                 # features/steps/web_steps.py:119
+    And I should see "A red fedora" in the "Description" field # features/steps/web_steps.py:119
+    And I should see "59.95" in the "Price" field              # features/steps/web_steps.py:119
+    When I copy the "Id" field                                 # features/steps/web_steps.py:81
+LOG_INFO:root: Clipboard contains: 1
+    And I press the "Clear" button                             # features/steps/web_steps.py:107
+    Then the "Id" field should be empty                        # features/steps/web_steps.py:72
+    When I paste the "Id" field                                # features/steps/web_steps.py:90
+    And I press the "Retrieve" button                          # features/steps/web_steps.py:107
+    Then I should see the message "Success"                    # features/steps/web_steps.py:139
+    And I should see "Hat" in the "Name" field                 # features/steps/web_steps.py:119
+    And I should see "A red fedora" in the "Description" field # features/steps/web_steps.py:119
+    And I should see "59.95" in the "Price" field              # features/steps/web_steps.py:119
+
+  Scenario: Update a Product                                     # features/products.feature:60
+    Given the following products                                 # features/steps/load_steps.py:33
+      | name    | description     | price  | available | category   |
+      | Hat     | A red fedora    | 59.95  | True      | CLOTHS     |
+      | Shoes   | Blue shoes      | 120.50 | False     | CLOTHS     |
+      | Big Mac | 1/4 lb burger   | 5.99   | True      | FOOD       |
+      | Sheets  | Full bed sheets | 87.00  | True      | HOUSEWARES |
+    When I visit the "Home Page"                                 # features/steps/web_steps.py:36
+    And I set the "Name" to "Hat"                                # features/steps/web_steps.py:53
+    And I press the "Search" button                              # features/steps/web_steps.py:107
+    Then I should see the message "Success"                      # features/steps/web_steps.py:139
+    And I should see "Hat" in the "Name" field                   # features/steps/web_steps.py:119
+    And I should see "A red fedora" in the "Description" field   # features/steps/web_steps.py:119
+    When I change "Description" to "A green fedora"              # features/steps/web_steps.py:130
+    And I press the "Update" button                              # features/steps/web_steps.py:107
+    Then I should see the message "Success"                      # features/steps/web_steps.py:139
+    When I copy the "Id" field                                   # features/steps/web_steps.py:81
+LOG_INFO:root: Clipboard contains: 1
+    And I press the "Clear" button                               # features/steps/web_steps.py:107
+    And I paste the "Id" field                                   # features/steps/web_steps.py:90
+    And I press the "Retrieve" button                            # features/steps/web_steps.py:107
+    Then I should see the message "Success"                      # features/steps/web_steps.py:139
+    And I should see "A green fedora" in the "Description" field # features/steps/web_steps.py:119
+    When I press the "Clear" button                              # features/steps/web_steps.py:107
+    And I press the "Search" button                              # features/steps/web_steps.py:107
+    Then I should see the message "Success"                      # features/steps/web_steps.py:139
+    And I should see "A green fedora" in the results             # features/steps/web_steps.py:149
+    And I should not see "A red fedora" in the results           # features/steps/web_steps.py:159
+
+  Scenario: Delete a Product                                  # features/products.feature:82
+    Given the following products                              # features/steps/load_steps.py:33
+      | name    | description     | price  | available | category   |
+      | Hat     | A red fedora    | 59.95  | True      | CLOTHS     |
+      | Shoes   | Blue shoes      | 120.50 | False     | CLOTHS     |
+      | Big Mac | 1/4 lb burger   | 5.99   | True      | FOOD       |
+      | Sheets  | Full bed sheets | 87.00  | True      | HOUSEWARES |
+    When I visit the "Home Page"                              # features/steps/web_steps.py:36
+    And I set the "Name" to "Hat"                             # features/steps/web_steps.py:53
+    And I press the "Search" button                           # features/steps/web_steps.py:107
+    Then I should see the message "Success"                   # features/steps/web_steps.py:139
+    And I should see "Hat" in the "Name" field                # features/steps/web_steps.py:119
+    When I copy the "Id" field                                # features/steps/web_steps.py:81
+LOG_INFO:root: Clipboard contains: 1
+    And I press the "Delete" button                           # features/steps/web_steps.py:107
+    Then I should see the message "Product has been Deleted!" # features/steps/web_steps.py:139
+    When I press the "Clear" button                           # features/steps/web_steps.py:107
+    And I paste the "Id" field                                # features/steps/web_steps.py:90
+    And I press the "Retrieve" button                         # features/steps/web_steps.py:107
+    Then I should see the message "404 Not Found"             # features/steps/web_steps.py:139
+
+  Scenario: List all Products                 # features/products.feature:96
+    Given the following products              # features/steps/load_steps.py:33
+      | name    | description     | price  | available | category   |
+      | Hat     | A red fedora    | 59.95  | True      | CLOTHS     |
+      | Shoes   | Blue shoes      | 120.50 | False     | CLOTHS     |
+      | Big Mac | 1/4 lb burger   | 5.99   | True      | FOOD       |
+      | Sheets  | Full bed sheets | 87.00  | True      | HOUSEWARES |
+    When I visit the "Home Page"              # features/steps/web_steps.py:36
+    And I press the "Clear" button            # features/steps/web_steps.py:107
+    And I press the "Search" button           # features/steps/web_steps.py:107
+    Then I should see the message "Success"   # features/steps/web_steps.py:139
+    And I should see "Hat" in the results     # features/steps/web_steps.py:149
+    And I should see "Shoes" in the results   # features/steps/web_steps.py:149
+    And I should see "Big Mac" in the results # features/steps/web_steps.py:149
+    And I should see "Sheets" in the results  # features/steps/web_steps.py:149
+
+  Scenario: Search by Category                       # features/products.feature:106
+    Given the following products                     # features/steps/load_steps.py:33
+      | name    | description     | price  | available | category   |
+      | Hat     | A red fedora    | 59.95  | True      | CLOTHS     |
+      | Shoes   | Blue shoes      | 120.50 | False     | CLOTHS     |
+      | Big Mac | 1/4 lb burger   | 5.99   | True      | FOOD       |
+      | Sheets  | Full bed sheets | 87.00  | True      | HOUSEWARES |
+    When I visit the "Home Page"                     # features/steps/web_steps.py:36
+    And I press the "Clear" button                   # features/steps/web_steps.py:107
+    And I select "Cloths" in the "Category" dropdown # features/steps/web_steps.py:60
+    And I press the "Search" button                  # features/steps/web_steps.py:107
+    Then I should see the message "Success"          # features/steps/web_steps.py:139
+    And I should see "Hat" in the results            # features/steps/web_steps.py:149
+    And I should see "Shoes" in the results          # features/steps/web_steps.py:149
+    And I should not see "Big Mac" in the results    # features/steps/web_steps.py:159
+    And I should not see "Sheets" in the results     # features/steps/web_steps.py:159
+
+  Scenario: Search by Availability                  # features/products.feature:117
+    Given the following products                    # features/steps/load_steps.py:33
+      | name    | description     | price  | available | category   |
+      | Hat     | A red fedora    | 59.95  | True      | CLOTHS     |
+      | Shoes   | Blue shoes      | 120.50 | False     | CLOTHS     |
+      | Big Mac | 1/4 lb burger   | 5.99   | True      | FOOD       |
+      | Sheets  | Full bed sheets | 87.00  | True      | HOUSEWARES |
+    When I visit the "Home Page"                    # features/steps/web_steps.py:36
+    And I press the "Clear" button                  # features/steps/web_steps.py:107
+    And I select "True" in the "Available" dropdown # features/steps/web_steps.py:60
+    And I press the "Search" button                 # features/steps/web_steps.py:107
+    Then I should see the message "Success"         # features/steps/web_steps.py:139
+    And I should see "Hat" in the results           # features/steps/web_steps.py:149
+    And I should see "Big Mac" in the results       # features/steps/web_steps.py:149
+    And I should see "Sheets" in the results        # features/steps/web_steps.py:149
+    And I should not see "Shoes" in the results     # features/steps/web_steps.py:159
+
+  Scenario: Search by Name                        # features/products.feature:128
+    Given the following products                  # features/steps/load_steps.py:33
+      | name    | description     | price  | available | category   |
+      | Hat     | A red fedora    | 59.95  | True      | CLOTHS     |
+      | Shoes   | Blue shoes      | 120.50 | False     | CLOTHS     |
+      | Big Mac | 1/4 lb burger   | 5.99   | True      | FOOD       |
+      | Sheets  | Full bed sheets | 87.00  | True      | HOUSEWARES |
+    When I visit the "Home Page"                  # features/steps/web_steps.py:36
+    And I press the "Clear" button                # features/steps/web_steps.py:107
+    And I set the "Name" to "Hat"                 # features/steps/web_steps.py:53
+    And I press the "Search" button               # features/steps/web_steps.py:107
+    Then I should see the message "Success"       # features/steps/web_steps.py:139
+    And I should see "Hat" in the results         # features/steps/web_steps.py:149
+    And I should not see "Shoes" in the results   # features/steps/web_steps.py:159
+    And I should not see "Big Mac" in the results # features/steps/web_steps.py:159
+    And I should not see "Sheets" in the results  # features/steps/web_steps.py:159
+
+1 feature passed, 0 failed, 0 skipped
+9 scenarios passed, 0 failed, 0 skipped
+116 steps passed, 0 failed, 0 skipped
+Took 2min 43.724s
+

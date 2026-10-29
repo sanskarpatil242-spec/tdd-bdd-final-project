@@ -1,0 +1,154 @@
+======================================================================
+COURSERA FINAL PROJECT SUBMISSION
+======================================================================
+
+PROJECT DETAILS
+----------------------------------------------------------------------
+Language: Python
+Repository URL: https://github.com/sanskarpatil242-spec/tdd-bdd-final-project
+Default Branch: main
+
+TASK 1 — FAKE PRODUCT FACTORY
+----------------------------------------------------------------------
+URL: https://github.com/sanskarpatil242-spec/tdd-bdd-final-project/blob/main/tests/factories.py#L25-L61
+Description: Factory definition for generating valid test products.
+
+TASK 2 — MODEL TESTS
+----------------------------------------------------------------------
+2a) Read:
+URL: https://github.com/sanskarpatil242-spec/tdd-bdd-final-project/blob/main/tests/test_models.py#L104-L116
+Description: Test case verifying that the model reads a product.
+
+2b) Update:
+URL: https://github.com/sanskarpatil242-spec/tdd-bdd-final-project/blob/main/tests/test_models.py#L117-L141
+Description: Test case verifying that the model updates a product.
+
+2c) Delete:
+URL: https://github.com/sanskarpatil242-spec/tdd-bdd-final-project/blob/main/tests/test_models.py#L142-L150
+Description: Test case verifying that the model deletes a product.
+
+2d) List All:
+URL: https://github.com/sanskarpatil242-spec/tdd-bdd-final-project/blob/main/tests/test_models.py#L152-L163
+Description: Test case verifying that the model lists all products.
+
+2e) Find by Name:
+URL: https://github.com/sanskarpatil242-spec/tdd-bdd-final-project/blob/main/tests/test_models.py#L164-L175
+Description: Test case verifying that the model finds products by name.
+
+2f) Find by Category:
+URL: https://github.com/sanskarpatil242-spec/tdd-bdd-final-project/blob/main/tests/test_models.py#L188-L199
+Description: Test case verifying that the model finds products by category.
+
+2g) Find by Availability:
+URL: https://github.com/sanskarpatil242-spec/tdd-bdd-final-project/blob/main/tests/test_models.py#L176-L187
+Description: Test case verifying that the model finds products by availability.
+
+TASK 3 — ROUTE TESTS
+----------------------------------------------------------------------
+3a) Read Route:
+URL: https://github.com/sanskarpatil242-spec/tdd-bdd-final-project/blob/main/tests/test_routes.py#L166-L181
+Description: Test verifying GET /products/<id>.
+
+3b) Update Route:
+URL: https://github.com/sanskarpatil242-spec/tdd-bdd-final-project/blob/main/tests/test_routes.py#L185-L205
+Description: Test verifying PUT /products/<id>.
+
+3c) Delete Route:
+URL: https://github.com/sanskarpatil242-spec/tdd-bdd-final-project/blob/main/tests/test_routes.py#L209-L222
+Description: Test verifying DELETE /products/<id>.
+
+3d) List All Route:
+URL: https://github.com/sanskarpatil242-spec/tdd-bdd-final-project/blob/main/tests/test_routes.py#L226-L233
+Description: Test verifying GET /products.
+
+3e) List by Name:
+URL: https://github.com/sanskarpatil242-spec/tdd-bdd-final-project/blob/main/tests/test_routes.py#L237-L250
+Description: Test verifying GET /products?name=<name>.
+
+3f) List by Category:
+URL: https://github.com/sanskarpatil242-spec/tdd-bdd-final-project/blob/main/tests/test_routes.py#L254-L269
+Description: Test verifying GET /products?category=<category>.
+
+3g) List by Availability:
+URL: https://github.com/sanskarpatil242-spec/tdd-bdd-final-project/blob/main/tests/test_routes.py#L273-L288
+Description: Test verifying GET /products?available=<availability>.
+
+TASK 4 — SERVICE ROUTES
+----------------------------------------------------------------------
+4a) Read Service:
+URL: https://github.com/sanskarpatil242-spec/tdd-bdd-final-project/blob/main/service/routes.py#L132-L146
+Description: Implementation of GET /products/<id>.
+
+4b) Update Service:
+URL: https://github.com/sanskarpatil242-spec/tdd-bdd-final-project/blob/main/service/routes.py#L151-L170
+Description: Implementation of PUT /products/<id>.
+
+4c) Delete Service:
+URL: https://github.com/sanskarpatil242-spec/tdd-bdd-final-project/blob/main/service/routes.py#L175-L187
+Description: Implementation of DELETE /products/<id>.
+
+4d) List / Query Service:
+URL: https://github.com/sanskarpatil242-spec/tdd-bdd-final-project/blob/main/service/routes.py#L96-L127
+Description: Implementation of GET /products supporting all filters.
+
+TASK 5 — BDD DATA LOADING
+----------------------------------------------------------------------
+5a) Background Data Loading Step:
+URL: https://github.com/sanskarpatil242-spec/tdd-bdd-final-project/blob/main/features/steps/load_steps.py#L33-L58
+Description: Step definition that resets and populates the test database.
+
+TASK 6 — BDD FEATURE SCENARIOS
+----------------------------------------------------------------------
+6a) Read Scenario:
+URL: https://github.com/sanskarpatil242-spec/tdd-bdd-final-project/blob/main/features/products.feature#L42-L58
+Description: Scenario verifying reading a product.
+
+6b) Update Scenario:
+URL: https://github.com/sanskarpatil242-spec/tdd-bdd-final-project/blob/main/features/products.feature#L60-L80
+Description: Scenario verifying updating a product.
+
+6c) Delete Scenario:
+URL: https://github.com/sanskarpatil242-spec/tdd-bdd-final-project/blob/main/features/products.feature#L82-L94
+Description: Scenario verifying deleting a product.
+
+6d) List All Scenario:
+URL: https://github.com/sanskarpatil242-spec/tdd-bdd-final-project/blob/main/features/products.feature#L96-L104
+Description: Scenario verifying listing all products.
+
+6e) Search by Category:
+URL: https://github.com/sanskarpatil242-spec/tdd-bdd-final-project/blob/main/features/products.feature#L106-L115
+Description: Scenario verifying searching by category.
+
+6f) Search by Availability:
+URL: https://github.com/sanskarpatil242-spec/tdd-bdd-final-project/blob/main/features/products.feature#L117-L126
+Description: Scenario verifying searching by availability.
+
+6g) Search by Name:
+URL: https://github.com/sanskarpatil242-spec/tdd-bdd-final-project/blob/main/features/products.feature#L128-L137
+Description: Scenario verifying searching by name.
+
+TASK 7 — WEB STEP DEFINITIONS
+----------------------------------------------------------------------
+7a) Button Click:
+URL: https://github.com/sanskarpatil242-spec/tdd-bdd-final-project/blob/main/features/steps/web_steps.py#L107-L110
+Description: Step definition that clicks a specified button.
+
+7b) Verify Name/Text IS Present:
+URL: https://github.com/sanskarpatil242-spec/tdd-bdd-final-project/blob/main/features/steps/web_steps.py#L149-L157
+Description: Step definition asserting that text exists in results.
+
+7c) Verify Name/Text is NOT Present:
+URL: https://github.com/sanskarpatil242-spec/tdd-bdd-final-project/blob/main/features/steps/web_steps.py#L159-L162
+Description: Step definition asserting that text does not exist in results.
+
+7d) Verify Message:
+URL: https://github.com/sanskarpatil242-spec/tdd-bdd-final-project/blob/main/features/steps/web_steps.py#L139-L147
+Description: Step definition asserting that a status message appears.
+
+TEST VERIFICATION SUMMARY
+----------------------------------------------------------------------
+Unit / Route Tests: 27 passed
+BDD Scenarios: 9 passed
+All Tests Passing: YES
+Failures / Errors: 0
+======================================================================
